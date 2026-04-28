@@ -1,0 +1,6 @@
+target
+.mvn
+src/test
+run.log
+run.err.log
+data

@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: bookly-backend
+    env: docker
+    rootDir: backend
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_DRIVER
+        value: com.mysql.cj.jdbc.Driver
+      - key: HIBERNATE_DIALECT
+        value: org.hibernate.dialect.MySQLDialect
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRATION_MS
+        value: 86400000
+  - type: web
+    name: bookly-frontend
+    env: docker
+    rootDir: frontend
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false

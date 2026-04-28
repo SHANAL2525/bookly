@@ -1,0 +1,16 @@
+{
+  "name": "bookly",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "stop:frontend": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$connections = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if ($connections) { $connections | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue } }; exit 0\"",
+    "stop:backend": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$connections = Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue; if ($connections) { $connections | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue } }; exit 0\"",
+    "stop": "npm run stop:frontend && npm run stop:backend",
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "mvn -f backend/pom.xml spring-boot:run",
+    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\dev.ps1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
