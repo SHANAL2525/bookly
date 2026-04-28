@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import Table from "@/components/ui/Table";
 import EmptyState from "@/components/ui/EmptyState";
 import { ApiError, api } from "@/lib/api";
+import { formatLkr } from "@/lib/currency";
 import { getSession } from "@/lib/session";
 import { BookingItem, ServiceItem, StaffItem } from "@/lib/types";
 import { PlusIcon } from "@/components/ui/Icons";
@@ -216,7 +217,7 @@ export default function BookingPage() {
                 <option value="">Service</option>
                 {services.map((service) => (
                   <option key={service.id} value={service.id}>
-                    {service.name}
+                    {service.name} - {formatLkr(service.price)}
                   </option>
                 ))}
               </select>

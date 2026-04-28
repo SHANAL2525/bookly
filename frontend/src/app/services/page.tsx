@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import Table from "@/components/ui/Table";
 import EmptyState from "@/components/ui/EmptyState";
 import { ApiError, api } from "@/lib/api";
+import { formatLkr } from "@/lib/currency";
 import { getSession } from "@/lib/session";
 import { ServiceItem } from "@/lib/types";
 import { PlusIcon } from "@/components/ui/Icons";
@@ -121,7 +122,7 @@ export default function ServicesPage() {
           rows={services.map((service) => [
             service.name,
             `${service.durationMinutes} min`,
-            `$${service.price.toFixed(2)}`,
+            formatLkr(service.price),
             <div key={`actions-${service.id}`} className="flex flex-wrap gap-2">
               <button onClick={() => openEdit(service)} className="rounded-lg bg-[#f2efff] px-3 py-1 text-xs font-semibold text-[#5d51ea]">
                 Edit
@@ -156,7 +157,7 @@ export default function ServicesPage() {
                 {fieldErrors.durationMinutes ? <p className="mt-1 text-xs text-[#b42318]">{fieldErrors.durationMinutes}</p> : null}
               </div>
               <div>
-                <input className="w-full px-4 py-2.5 text-sm" placeholder="Price" required value={form.price} onChange={(event) => setForm({ ...form, price: event.target.value })} />
+                <input className="w-full px-4 py-2.5 text-sm" placeholder="Price (LKR)" required value={form.price} onChange={(event) => setForm({ ...form, price: event.target.value })} />
                 {fieldErrors.price ? <p className="mt-1 text-xs text-[#b42318]">{fieldErrors.price}</p> : null}
               </div>
               <div>

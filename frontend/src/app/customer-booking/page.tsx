@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Button from "@/components/ui/Button";
 import { ApiError, api } from "@/lib/api";
+import { formatLkr } from "@/lib/currency";
 import { getSession } from "@/lib/session";
 import { ServiceItem, StaffItem } from "@/lib/types";
 
@@ -125,7 +126,7 @@ export default function CustomerBookingPage() {
               <option value="">Select Service</option>
               {services.map((service) => (
                 <option key={service.id} value={service.id}>
-                  {service.name}
+                  {service.name} - {formatLkr(service.price)}
                 </option>
               ))}
             </select>
